@@ -87,7 +87,7 @@ posts.forEach((post) => {
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${counter}</b> persone
+                    Piace a <b id="like-counter-${id}" class="js-likes-counter">${counter}</b> persone
                 </div>
             </div>
         </div> 
@@ -102,5 +102,7 @@ posts.forEach((post) => {
     likeButton.addEventListener('click', function(){
         likeButton.classList.add('like-button--liked');
         counter++;
+        const domCounter = document.getElementById('like-counter-' + id);
+        domCounter.innerHTML = counter;
     });
 });
