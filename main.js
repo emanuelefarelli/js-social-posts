@@ -59,7 +59,9 @@ const myContainer = document.getElementById('container');
 
 posts.forEach((post) => {
     const domPost = document.createElement('div');
-    const {content, media, author, likes, created} = post;
+    const {id,content, media, author, likes, created} = post;
+    let counter = likes;
+    
     domPost.innerHTML = ` 
     <div class="post__header">
         <div class="post-meta">                    
@@ -79,18 +81,26 @@ posts.forEach((post) => {
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                    <a class="like-button  js-like-button" id="like-button${id}" href="#" data-postid="1">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                    Piace a <b id="like-counter-1" class="js-likes-counter">${counter}</b> persone
+                </div>
             </div>
         </div> 
     </div> 
-
-    `
+    `;
+    
     domPost.classList.add('post');
-    myContainer.append(domPost);
+    myContainer.append(domPost);   
+
+    const likeButton = document.getElementById('like-button'+ id);
+    console.log(likeButton);
+    likeButton.addEventListener('click', function(){
+        likeButton.classList.add('like-button--liked');
+        counter++;
+    });
 });
